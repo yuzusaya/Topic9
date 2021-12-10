@@ -19,10 +19,23 @@ namespace Topic9.Views.Products
             InitializeComponent();
             BindingContext = this;
         }
+        public AddProductPage(Product product)
+        {
+            InitializeComponent();
+            ProductToBeAdded = product;
+            BindingContext = this;
+        }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            new FirebaseService().AddProduct(ProductToBeAdded);
+            if(string.IsNullOrWhiteSpace(ProductToBeAdded.Id))
+            {
+                new FirebaseService().AddProduct(ProductToBeAdded);
+            }
+            else
+            {
+                new FirebaseService().UpdateProduct(ProductToBeAdded);
+            }
             Navigation.PopAsync();
         }
     }

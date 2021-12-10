@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Topic9.Models"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Name="ThisPage"
              x:Class="Topic9.Views.Products.ProductsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="ToolbarItem_Clicked"/>
@@ -10,7 +12,8 @@
         <CollectionView ItemsSource="{Binding DisplayedProducts}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout x:DataType="model:Product">
+                    <StackLayout xct:TouchEffect.LongPressCommand="{Binding BindingContext.DeleteCommand,Source={x:Reference ThisPage}}" xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                                 xct:TouchEffect.Command="{Binding BindingContext.EditCommand,Source={x:Reference ThisPage}}" xct:TouchEffect.CommandParameter="{Binding .}">
                         <Label Text="{Binding Name}"/>
                         <Label Text="{Binding Description}"/>
                         <Label Text="{Binding Price,StringFormat='RM{0:F2}'}"/>
