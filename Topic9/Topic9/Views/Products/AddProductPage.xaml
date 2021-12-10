@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Topic9.Views.Products.AddProductPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Entry Placeholder="Name" Text="{Binding ProductToBeAdded.Name}">
+                
+            </Entry>
+            <Entry Placeholder="Description" Text="{Binding ProductToBeAdded.Description}">
+                
+            </Entry>
+            <Entry Placeholder="Price" Text="{Binding ProductToBeAdded.Price}">
+
+            </Entry>
+            <Button Text="Save" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
