@@ -17,12 +17,15 @@ namespace Topic9.Services
     {
         FirebaseClient Client { get; } = new FirebaseClient("https://databasetestingproject-4fa65-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
-        public async Task<List<T>> GetTAsync<T>() where T : FirebaseObj
+        public async Task<List<T>> GetTAsync<T>(string collectionName = "") where T : FirebaseObj
         {
-            var collectionName = typeof(T).ToString().Split('.').Last();
+            if (string.IsNullOrWhiteSpace(collectionName))
+            {
+                collectionName = typeof(T).ToString().Split('.').Last();
+            }
             var firebaseObject = await Client.Child(collectionName).OnceAsync<T>();
             var items = new List<T>();
-            foreach(var firebaseObj in firebaseObject)
+            foreach (var firebaseObj in firebaseObject)
             {
                 var item = firebaseObj.Object;
                 item.Key = firebaseObj.Key;
