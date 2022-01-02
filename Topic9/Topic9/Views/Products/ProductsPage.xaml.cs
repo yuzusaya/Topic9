@@ -32,7 +32,8 @@ namespace Topic9.Views.Products
         {
             base.OnAppearing();
             DisplayedProducts.Clear();
-            var products = await new FirebaseService().GetAllProducts();
+            //var products = await new FirebaseService().GetAllProducts();
+            var products = await new FirebaseService().GetTAsync<Product>();
             foreach(var product in products)
             {
                 DisplayedProducts.Add(product);

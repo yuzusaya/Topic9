@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Topic9.Models
 {
-    public class Product
+    public class Product : FirebaseObj
     {
         [JsonIgnore]
         public string Id { get; set; }

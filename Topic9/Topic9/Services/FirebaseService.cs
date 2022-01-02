@@ -16,6 +16,20 @@ namespace Topic9.Services
     public class FirebaseService
     {
         FirebaseClient Client { get; } = new FirebaseClient("https://databasetestingproject-4fa65-default-rtdb.asia-southeast1.firebasedatabase.app/");
+
+        public async Task<List<T>> GetTAsync<T>() where T : FirebaseObj
+        {
+            var collectionName = typeof(T).ToString().Split('.').Last();
+            var firebaseObject = await Client.Child(collectionName).OnceAsync<T>();
+            var items = new List<T>();
+            foreach(var firebaseObj in firebaseObject)
+            {
+                var item = firebaseObj.Object;
+                item.Key = firebaseObj.Key;
+                items.Add(item);
+            }
+            return items;
+        }
         public async Task<List<Product>> GetAllProducts()
         {
             var result = await Client.Child(nameof(Product)).OnceAsync<Product>();
